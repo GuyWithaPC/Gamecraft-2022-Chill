@@ -49,7 +49,7 @@ func _draw():
 	var start_position = percentage*360
 	var color = Color(0,1,0)
 	color.h = (1.0/3.0)-(percentage/3.0)
-	if (timer/default_timer) < 1:
+	if (timer/default_timer) < 1 and timer > 0:
 		draw_circle_arc_poly(Vector2.ZERO,40,start_position,360,color)
 
 func _process(delta):
