@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/DoubleBump.wav-ebc1282d42af955599d5aff9ba2e6346.sample"
+
+[deps]
+
+source_file="res://Sounds/DoubleBump.wav"
+dest_files=[ "res://.import/DoubleBump.wav-ebc1282d42af955599d5aff9ba2e6346.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
