@@ -41,6 +41,8 @@ polygon = PoolVector2Array( 49, -301.9, 47.9, -301.1, 52.7, -297, 55.4, -297, 18
 [node name="Pie" type="RigidBody2D" parent="."]
 script = ExtResource( 13 )
 dies_from_collision = true
+dies_from_angle = true
+death_angle_margin = 70
 
 [node name="Sprite" type="Sprite" parent="Pie"]
 texture = ExtResource( 1 )
@@ -58,6 +60,8 @@ shape = SubResource( 1 )
 
 [node name="Pizza" type="RigidBody2D" parent="."]
 script = ExtResource( 13 )
+dies_from_angle = true
+death_angle_margin = 30
 
 [node name="Sprite" type="Sprite" parent="Pizza"]
 texture = ExtResource( 12 )
@@ -132,6 +136,8 @@ polygon = PoolVector2Array( 213, -80.3, 222, -76.3, 222, -73.6, 226, -67.6, 226,
 
 [node name="Turkey" type="RigidBody2D" parent="."]
 script = ExtResource( 13 )
+dies_from_angle = true
+death_angle_margin = 45
 
 [node name="Sprite" type="Sprite" parent="Turkey"]
 texture = ExtResource( 8 )

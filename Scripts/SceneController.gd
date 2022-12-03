@@ -5,6 +5,8 @@ extends Node2D
 # var a = 2
 # var b = "text"
 
+var dragging = false
+
 onready var food_scene = preload("res://Prefabs/FoodItems.tscn").instance()
 var foods = ["Apple","Milk","Pie","Pizza","Soda","Soup","Tea","TupperwareLg","TupperwareMd","TupperwareSm","Turkey","Watermelon"]
 # Called when the node enters the scene tree for the first time.
