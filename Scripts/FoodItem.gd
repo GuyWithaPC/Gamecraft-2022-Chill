@@ -5,6 +5,8 @@ var mouse_inside = false
 var mouse_down = false
 var in_play_area = false
 var velocity = Vector2(0,0)
+var dead = false
+var dead_timer = 2.0
 
 onready var _last_position = position
 onready var _play_area = get_tree().get_root().get_child(0).get_node("PlayArea")
@@ -12,6 +14,13 @@ onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 export var default_timer = 5.0
 onready var timer = default_timer
+
+# to enable this, the FoodItem it's attached to needs to have a DeathArea Area2D attached
+export var dies_from_collision = false
+
+# this one just works as long as you set the margin properly
+export var dies_from_angle = false
+export var death_angle_margin = 0
 
 func _ready():
 	# set up event handling
@@ -24,6 +33,8 @@ func _ready():
 	self.can_sleep = false
 	# misc
 	$Sprite.show_behind_parent = true
+	add_to_group("Food")
+	add_to_group("Table")
 
 func _draw():
 	var percentage = ((default_timer-timer)/default_timer)
@@ -34,6 +45,17 @@ func _draw():
 		draw_circle_arc_poly(Vector2.ZERO,40,start_position,360,color)
 
 func _process(delta):
+	if !dead and dies_from_collision:
+		dead = check_death_from_collision()
+	if !dead and dies_from_angle:
+		dead = check_death_from_angle()
+	
+	if dead:
+		dead_timer -= delta
+		if dead_timer <= 0:
+			self.queue_free()
+		$Sprite.modulate = Color(1,1,1,0.2)
+	
 	if mouse_inside and Input.is_action_just_pressed("left_click"):
 		dragged = !dragged
 		if !dragged:
@@ -47,10 +69,10 @@ func _process(delta):
 	
 	if dragged:
 		$Sprite.scale = Vector2(1.1,1.1)
-		$Sprite.self_modulate = Color(1,1,1,0.5)
-	else:
+		$Sprite.modulate = Color(1,1,1,0.5)
+	elif not dead:
 		$Sprite.scale = Vector2(1.0,1.0)
-		$Sprite.self_modulate = Color(1,1,1,1)
+		$Sprite.modulate = Color(1,1,1,1)
 	
 	if !in_play_area:
 		timer -= delta
@@ -84,10 +106,14 @@ func _on_mouse_exited():
 
 func _on_body_entered(body):
 	if body.name == self.name:
+		add_to_group("Fridge")
+		remove_from_group("Table")
 		in_play_area = true
 
 func _on_body_exited(body):
 	if body.name == self.name:
+		add_to_group("Table")
+		remove_from_group("Fridge")
 		in_play_area = false
 
 # helper functions
@@ -102,3 +128,15 @@ func draw_circle_arc_poly(center, radius, angle_from, angle_to, color):
 		var angle_point = deg2rad(angle_from + i * (angle_to - angle_from) / nb_points - 90)
 		points_arc.push_back(center + Vector2(cos(angle_point), sin(angle_point)) * radius)
 	draw_polygon(points_arc, colors)
+
+func check_death_from_collision():
+	for obj in $DeathArea.get_overlapping_bodies():
+		if obj.is_in_group("Fridge") and obj.is_in_group("Food") and obj != self and !obj.dragged:
+			return true
+	return false
+
+func check_death_from_angle():
+	if !dragged:
+		if !(wrapf(self.rotation,0,2*PI) < deg2rad(death_angle_margin) or wrapf(self.rotation,0,2*PI) > 2*PI-deg2rad(death_angle_margin)):
+			return true
+	return false
