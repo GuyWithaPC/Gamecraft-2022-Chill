@@ -90,30 +90,6 @@ func _process(delta):
 			Input.set_custom_mouse_cursor(grabbed_cursor,0,Vector2(30,30))
 		else:
 			Input.set_custom_mouse_cursor(open_cursor,0,Vector2(30,30))
-
-	if randi()%400 == 0:
-		# Summon a food item
-		var food = randi()%len(foods)
-		var summoned = food_scene.get_node(foods[food]).duplicate()
-		# Set its values
-		summoned.start_position = Vector2(randi()%300+100,randi()%(1080/2)+1080/2)
-		summoned.position = summoned.start_position - Vector2(500,0)
-		summoned.scale = Vector2(0.5,0.5)
-		# Set up its spill mask
-		if spill_mask_index > max_spill_mask_index:
-			spill_mask_index = 100
-		summoned.get_child(2).z_index = spill_mask_index
-		summoned.get_child(3).range_z_min = spill_mask_index
-		summoned.get_child(3).range_z_max = spill_mask_index
-		spill_mask_index += 1
-		# Add it to this node
-		add_child(summoned)
-	if randi()%400 == 0 and !wanting_food and len(get_tree().get_nodes_in_group("Fridge")) > 0:
-		var random_food = get_tree().get_nodes_in_group("Fridge")[randi()%len(get_tree().get_nodes_in_group("Fridge"))]
-		var food = random_food.name.replace("@","").rstrip("0123456789")
-		print("wants: "+food)
-		wanting_food = food
-		grab_region.ask()
 	
 	if wanting_food != null:
 		want_speech.texture = food_sprites[wanting_food]
@@ -137,3 +113,37 @@ func _process(delta):
 
 func _on_RetryButton_pressed():
 	get_tree().change_scene("res://Scenes/Menu.tscn")
+
+
+func _on_NewActionTimer_timeout():
+	if randi()%2 == 0 and !wanting_food and len(get_tree().get_nodes_in_group("Fridge")) > 0:
+		spawn_random_request()
+	else:
+		spawn_random_food()
+	
+	$NewActionTimer.wait_time = max($NewActionTimer.wait_time - 0.02, 1)
+
+func spawn_random_food():
+	# Summon a food item
+	var food = randi()%len(foods)
+	var summoned = food_scene.get_node(foods[food]).duplicate()
+	# Set its values
+	summoned.start_position = Vector2(randi()%300+100,randi()%(1080/2)+1080/2)
+	summoned.position = summoned.start_position - Vector2(500,0)
+	summoned.scale = Vector2(0.5,0.5)
+	# Set up its spill mask
+	if spill_mask_index > max_spill_mask_index:
+		spill_mask_index = 100
+	summoned.get_child(2).z_index = spill_mask_index
+	summoned.get_child(3).range_z_min = spill_mask_index
+	summoned.get_child(3).range_z_max = spill_mask_index
+	spill_mask_index += 1
+	# Add it to this node
+	add_child(summoned)
+	
+func spawn_random_request():
+	var random_food = get_tree().get_nodes_in_group("Fridge")[randi()%len(get_tree().get_nodes_in_group("Fridge"))]
+	var food = random_food.name.replace("@","").rstrip("0123456789")
+	print("wants: "+food)
+	wanting_food = food
+	grab_region.ask()
