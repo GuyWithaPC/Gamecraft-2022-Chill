@@ -10,6 +10,7 @@ var lose = false
 var wanting_food = null
 var score = 0
 var target_score = 0
+var blur_lod = 5.0
 
 onready var food_scene = preload("res://Prefabs/FoodItems.tscn").instance()
 onready var grabbed_cursor = preload("res://Images/cursor/cursor_closed.png")
@@ -60,9 +61,13 @@ func timer_out():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if lose:
+		blur_lod = lerp(blur_lod,2.5,delta)
 		$UI/LoseScreen.show()
 		$UI/LoseScreen.rotation = lerp($UI/LoseScreen.rotation,0,delta)
 		$UI/LoseScreen.scale = lerp($UI/LoseScreen.scale,Vector2(1.5,1.5),delta)
+	else:
+		blur_lod = lerp(blur_lod,0,delta*2)
+	$UI/Blur.get_material().set_shader_param("lod",blur_lod)
 	score = lerp(score,target_score,delta*10)
 	$UI/Score.text = "Score: " + str(round(score))
 	if dragging:
