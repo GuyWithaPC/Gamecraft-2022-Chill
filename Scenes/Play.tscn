@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Images/fridge.png" type="Texture" id=1]
 [ext_resource path="res://Images/fridge_rack.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/SceneController.gd" type="Script" id=3]
 [ext_resource path="res://Images/hand_give.png" type="Texture" id=4]
+[ext_resource path="res://Images/speech_bubble.png" type="Texture" id=5]
+[ext_resource path="res://Images/Food/turkey.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 480, 540 )
@@ -59,7 +61,7 @@ position = Vector2( 1968, 543 )
 shape = SubResource( 2 )
 
 [node name="GrabberPath" type="Path2D" parent="."]
-position = Vector2( 0, 130 )
+position = Vector2( 0, 256 )
 curve = SubResource( 3 )
 
 [node name="Grabber" type="PathFollow2D" parent="GrabberPath"]
@@ -76,3 +78,15 @@ texture = ExtResource( 4 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrabberPath/Grabber/GrabRegion"]
 position = Vector2( 56, -32 )
 shape = SubResource( 4 )
+
+[node name="SpeechBubble" type="Sprite" parent="GrabberPath/Grabber"]
+position = Vector2( -85.3333, -128 )
+rotation = -1.5708
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 5 )
+offset = Vector2( 200, -160 )
+
+[node name="SpeechWanting" type="Sprite" parent="GrabberPath/Grabber/SpeechBubble"]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+offset = Vector2( 400, -300 )
