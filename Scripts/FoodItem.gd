@@ -65,10 +65,16 @@ func _process(delta):
 		dead = check_death_from_angle()
 	
 	if dead:
+		modulate = Color(1.0,1.0,1.0)
+		$Spill.visible = true
 		dead_timer -= delta
 		if dead_timer <= 0:
+			dragged = false
+			get_parent().dragging = false
 			self.queue_free()
 		$Sprite.modulate = Color(1,1,1,0.2)
+		if $Spill.modulate == Color(1,1,1):
+			$Spill.modulate = Color(randf(),randf(),randf())
 	
 	if mouse_inside and Input.is_action_just_pressed("left_click"):
 		dragged = !dragged
@@ -169,8 +175,11 @@ func check_death_from_collision():
 
 func check_death_from_angle():
 	# also change sprite color based on how close it is
-	var tilt = abs(wrapf(self.rotation,-PI,PI)/deg2rad(death_angle_margin))
-	modulate = Color(1.0,1.0-tilt,1.0-tilt)
+	if !dead:
+		var tilt = abs(wrapf(self.rotation,-PI,PI)/deg2rad(death_angle_margin))
+		modulate = Color(1.0,1.0-tilt,1.0-tilt)
+	else:
+		modulate = Color(1.0,1.0,1.0)
 	if !dragged:
 		if !(wrapf(self.rotation,0,2*PI) < deg2rad(death_angle_margin) or wrapf(self.rotation,0,2*PI) > 2*PI-deg2rad(death_angle_margin)):
 			return true

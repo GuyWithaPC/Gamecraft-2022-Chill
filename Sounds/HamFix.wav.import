@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/HamFix.wav-18e4f26f83a21da4b7f7420c4aa23d68.sample"
+
+[deps]
+
+source_file="res://Sounds/HamFix.wav"
+dest_files=[ "res://.import/HamFix.wav-18e4f26f83a21da4b7f7420c4aa23d68.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
