@@ -25,10 +25,17 @@ onready var food_sprites = {
 	"Soup" : preload("res://Images/Food/soup.png"),
 	"Tea" : preload("res://Images/Food/tea.png"),
 	"TupperwareLg" : preload("res://Images/Food/tupperware_lg.png"),
+	"TupperwareMd" : preload("res://Images/Food/tupperware_md.png"),
 	"TupperwareSm" : preload("res://Images/Food/tupperware_sm.png"),
 	"Turkey" : preload("res://Images/Food/turkey.png"),
 	"Watermelon" : preload("res://Images/Food/watermelon.png")
 }
+
+# The z-index for the next item's spill texture mask.
+var spill_mask_index = 100
+# The maximum z-index for an item's spill texture mask
+var max_spill_mask_index = 200
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
@@ -42,11 +49,21 @@ func _process(delta):
 		Input.set_custom_mouse_cursor(open_cursor,0,Vector2(50,30))
 	
 	if randi()%200 == 0:
+		# Summon a food item
 		var food = randi()%len(foods)
 		var summoned = food_scene.get_node(foods[food]).duplicate()
+		# Set its values
 		summoned.start_position = Vector2(randi()%500,randi()%(1080/2)+1080/2)
 		summoned.position = summoned.start_position - Vector2(500,0)
 		summoned.scale = Vector2(0.5,0.5)
+		# Set up its spill mask
+		if spill_mask_index > max_spill_mask_index:
+			spill_mask_index = 100
+		summoned.get_child(2).z_index = spill_mask_index
+		summoned.get_child(3).range_z_min = spill_mask_index
+		summoned.get_child(3).range_z_max = spill_mask_index
+		spill_mask_index += 1
+		# Add it to this node
 		add_child(summoned)
 	if randi()%500 == 0 and !wanting_food:
 		var food = foods[randi()%len(foods)]
