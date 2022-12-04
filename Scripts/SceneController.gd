@@ -12,6 +12,8 @@ var score = 0
 var target_score = 0
 var blur_lod = 5.0
 
+var time_elapsed = 0
+
 onready var food_scene = preload("res://Prefabs/FoodItems.tscn").instance()
 onready var grabbed_cursor = preload("res://Images/cursor/cursor_closed.png")
 onready var open_cursor = preload("res://Images/cursor/cursor_open.png")
@@ -60,6 +62,13 @@ func timer_out():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	time_elapsed += delta
+	
+	# First 10 seconds are normal, then it starts speeding up
+	var music_speed = clamp(1 + ((time_elapsed - 10) / 300), 1, 1.5)
+
+	$MusicPlayer.pitch_scale = music_speed
+	
 	if lose:
 		blur_lod = lerp(blur_lod,2.5,delta)
 		$UI/LoseScreen.show()
