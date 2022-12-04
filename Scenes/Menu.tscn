@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Images/start.png" type="Texture" id=1]
 [ext_resource path="res://Images/play_button.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Shaders/blur.shader" type="Shader" id=4]
 [ext_resource path="res://Sounds/amb_fridge_loop_1.wav" type="AudioStream" id=5]
 [ext_resource path="res://Sounds/crowd-talking-2.wav" type="AudioStream" id=6]
+[ext_resource path="res://Images/instructions_button.png" type="Texture" id=7]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )
@@ -23,11 +24,29 @@ texture = ExtResource( 1 )
 centered = false
 
 [node name="StartButton" type="Button" parent="."]
-margin_left = 624.0
-margin_top = 808.0
-margin_right = 944.0
-margin_bottom = 1027.0
+margin_left = 576.0
+margin_top = 832.0
+margin_right = 896.0
+margin_bottom = 1051.0
 icon = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HelpButton" type="Button" parent="."]
+margin_left = 1088.0
+margin_top = 832.0
+margin_right = 1844.0
+margin_bottom = 1051.0
+icon = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HelpMenu" type="Panel" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
