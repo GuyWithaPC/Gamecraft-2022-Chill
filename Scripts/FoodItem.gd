@@ -16,9 +16,18 @@ onready var _last_position = start_position
 onready var _play_area = get_tree().get_root().get_child(0).get_node("PlayArea")
 onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 onready var timer_background = preload("res://Images/timer.png")
+onready var sound_effects = [
+	preload("res://Sounds/FridgeSound1Fix.wav"),
+	preload("res://Sounds/FridgeSound2Fix.wav"),
+	preload("res://Sounds/FridgeSound3Fix.wav"),
+	preload("res://Sounds/FridgeSound4Fix.wav"),
+	preload("res://Sounds/FridgeSound5Fix.wav"),
+	preload("res://Sounds/StackedFoodsFix.wav"),
+]
 
 export var default_timer = 5.0
 onready var timer = default_timer
+onready var sound_player = AudioStreamPlayer.new()
 
 export var start_position = Vector2(0,0)
 
@@ -30,6 +39,11 @@ export var dies_from_angle = false
 export var death_angle_margin = 0
 
 func _ready():
+	self.add_child(sound_player)
+	sound_player.volume_db = 0
+	self.contact_monitor = true
+	self.contacts_reported = 1
+	self.connect("body_entered",self,"_on_collided")
 	# set up event handling
 	self.connect("mouse_entered",self,"_on_mouse_entered")
 	self.connect("mouse_exited",self,"_on_mouse_exited")
@@ -158,6 +172,10 @@ func _on_body_exited(body):
 		add_to_group("Table")
 		remove_from_group("Fridge")
 		in_play_area = false
+
+func _on_collided(body):
+	sound_player.stream = sound_effects[randi()%len(sound_effects)]
+	sound_player.play()
 
 # helper functions
 
