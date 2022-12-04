@@ -136,7 +136,7 @@ func _integrate_forces(state):
 				state.angular_velocity = state.angular_velocity + 0.5
 			lv = (get_viewport().get_mouse_position() - self.position) * 32
 	else:
-		lv = (start_position - position) * 3
+		lv = (start_position - position) * 4
 	state.set_linear_velocity(lv)
 
 # event handling stuff
