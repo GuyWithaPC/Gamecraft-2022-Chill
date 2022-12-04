@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Images/fridge.png" type="Texture" id=1]
 [ext_resource path="res://Images/fridge_rack.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Scripts/GrabRegion.gd" type="Script" id=10]
 [ext_resource path="res://Images/lose.png" type="Texture" id=11]
 [ext_resource path="res://Shaders/blur.shader" type="Shader" id=12]
+[ext_resource path="res://Images/retry_button.png" type="Texture" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 480, 540 )
@@ -150,3 +151,16 @@ __meta__ = {
 position = Vector2( 960, 540 )
 scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 11 )
+
+[node name="RetryButton" type="Button" parent="UI"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 604.0
+margin_top = 796.0
+margin_right = 1272.0
+margin_bottom = 1015.0
+icon = ExtResource( 13 )
+[connection signal="pressed" from="UI/RetryButton" to="." method="_on_RetryButton_pressed"]

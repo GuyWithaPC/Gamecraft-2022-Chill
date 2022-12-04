@@ -11,6 +11,7 @@ var wanting_food = null
 var score = 0
 var target_score = 0
 var blur_lod = 5.0
+var dead_timer = 5.0
 
 var time_elapsed = 0
 
@@ -71,6 +72,9 @@ func _process(delta):
 	
 	if lose:
 		blur_lod = lerp(blur_lod,2.5,delta)
+		dead_timer -= delta
+		if dead_timer <= 0:
+			$UI/RetryButton.show()
 		$UI/LoseScreen.show()
 		$UI/LoseScreen.rotation = lerp($UI/LoseScreen.rotation,0,delta)
 		$UI/LoseScreen.scale = lerp($UI/LoseScreen.scale,Vector2(1.5,1.5),delta)
@@ -129,3 +133,7 @@ func _process(delta):
 	else:
 		hand.unit_offset = lerp(hand.unit_offset,0,delta*5)
 		bubble.rotation_degrees = lerp(bubble.rotation_degrees,-90,delta*5)
+
+
+func _on_RetryButton_pressed():
+	get_tree().change_scene("res://Scenes/Menu.tscn")

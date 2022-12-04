@@ -33,3 +33,11 @@ func _process(delta):
 
 func _on_StartButton_pressed():
 	starting = true
+
+
+func _on_HelpButton_pressed():
+	$HelpMenu.show()
+
+
+func _on_HelpClose_pressed():
+	$HelpMenu.hide()
