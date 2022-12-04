@@ -67,6 +67,8 @@ func _process(delta):
 	if dead:
 		dead_timer -= delta
 		if dead_timer <= 0:
+			dragged = false
+			get_parent().dragging = false
 			self.queue_free()
 		$Sprite.modulate = Color(1,1,1,0.2)
 	
