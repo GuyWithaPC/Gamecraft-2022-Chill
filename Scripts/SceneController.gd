@@ -67,10 +67,11 @@ func _process(delta):
 	
 	# First 10 seconds are normal, then it starts speeding up
 	var music_speed = clamp(1 + ((time_elapsed - 15) / 500), 1, 1.5)
-
 	$MusicPlayer.pitch_scale = music_speed
 	
 	if lose:
+		$MusicPlayer.pitch_scale = max(.6, (dead_timer / 5))
+		
 		blur_lod = lerp(blur_lod,2.5,delta)
 		dead_timer -= delta
 		if dead_timer <= 0:
