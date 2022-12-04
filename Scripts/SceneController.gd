@@ -68,8 +68,8 @@ func _process(delta):
 		spill_mask_index += 1
 		# Add it to this node
 		add_child(summoned)
-	if randi()%750 == 0 and !wanting_food and len(get_tree().get_nodes_in_group("Food")) > 0:
-		var random_food = get_tree().get_nodes_in_group("Food")[randi()%len(get_tree().get_nodes_in_group("Food"))]
+	if randi()%750 == 0 and !wanting_food and len(get_tree().get_nodes_in_group("Fridge")) > 0:
+		var random_food = get_tree().get_nodes_in_group("Fridge")[randi()%len(get_tree().get_nodes_in_group("Fridge"))]
 		var food = random_food.name.replace("@","").rstrip("0123456789")
 		print("wants: "+food)
 		wanting_food = food
