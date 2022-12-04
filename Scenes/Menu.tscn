@@ -52,7 +52,6 @@ __meta__ = {
 }
 
 [node name="HelpMenu" type="Panel" parent="."]
-visible = false
 margin_left = 50.0
 margin_top = 50.0
 margin_right = 1870.0
@@ -74,34 +73,34 @@ __meta__ = {
 }
 
 [node name="Drag" type="TextureRect" parent="HelpMenu/GridContainer"]
-margin_right = 901.0
-margin_bottom = 543.0
+margin_right = 827.0
+margin_bottom = 669.0
 texture = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Orders" type="TextureRect" parent="HelpMenu/GridContainer"]
-margin_left = 905.0
-margin_right = 1732.0
-margin_bottom = 543.0
-texture = ExtResource( 10 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Requirements" type="TextureRect" parent="HelpMenu/GridContainer"]
-margin_top = 547.0
-margin_right = 901.0
-margin_bottom = 1216.0
+margin_left = 831.0
+margin_right = 1732.0
+margin_bottom = 669.0
 texture = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Orders" type="TextureRect" parent="HelpMenu/GridContainer"]
+margin_top = 673.0
+margin_right = 827.0
+margin_bottom = 1216.0
+texture = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Timers" type="TextureRect" parent="HelpMenu/GridContainer"]
-margin_left = 905.0
-margin_top = 547.0
+margin_left = 831.0
+margin_top = 673.0
 margin_right = 1732.0
 margin_bottom = 1216.0
 texture = ExtResource( 11 )

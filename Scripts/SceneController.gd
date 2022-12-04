@@ -90,7 +90,7 @@ func _process(delta):
 			Input.set_custom_mouse_cursor(grabbed_cursor,0,Vector2(30,30))
 		else:
 			Input.set_custom_mouse_cursor(open_cursor,0,Vector2(30,30))
-	
+
 	if randi()%400 == 0:
 		# Summon a food item
 		var food = randi()%len(foods)
