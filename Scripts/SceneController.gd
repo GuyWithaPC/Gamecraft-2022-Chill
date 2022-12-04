@@ -6,6 +6,7 @@ extends Node2D
 # var b = "text"
 
 var dragging = false
+var lose = false
 var wanting_food = null
 var score = 0
 var target_score = 0
@@ -41,6 +42,7 @@ var max_spill_mask_index = 200
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
+	$UI/LoseScreen.rotation = 4*PI
 
 func food_destroyed():
 	target_score -= 20
@@ -52,9 +54,14 @@ func timer_out():
 		obj.queue_free()
 	for obj in get_tree().get_nodes_in_group("Table"):
 		obj.queue_free()
+	lose = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if lose:
+		$UI/LoseScreen.show()
+		$UI/LoseScreen.rotation = lerp($UI/LoseScreen.rotation,0,delta)
+		$UI/LoseScreen.scale = lerp($UI/LoseScreen.scale,Vector2(1.5,1.5),delta)
 	score = lerp(score,target_score,delta*10)
 	$UI/Score.text = "Score: " + str(round(score))
 	if dragging:
