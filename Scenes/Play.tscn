@@ -93,7 +93,7 @@ position = Vector2( 2.33334, -110 )
 shape = SubResource( 4 )
 
 [node name="SpeechBubble" type="Sprite" parent="GrabberPath/Grabber"]
-self_modulate = Color( 0.635294, 0.635294, 0.635294, 1 )
+self_modulate = Color( 1, 1, 1, 0.498039 )
 position = Vector2( -85.3333, -128 )
 rotation = -1.5708
 scale = Vector2( 0.75, 0.75 )

@@ -15,6 +15,7 @@ var start_timer = 1.0
 onready var _last_position = start_position
 onready var _play_area = get_tree().get_root().get_child(0).get_node("PlayArea")
 onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+onready var timer_background = preload("res://Images/timer.png")
 
 export var default_timer = 5.0
 onready var timer = default_timer
@@ -47,9 +48,10 @@ func _ready():
 func _draw():
 	var percentage = ((default_timer-timer)/default_timer)
 	var start_position = percentage*360
-	var color = Color(0,1,0)
+	var color = Color(0,1,0,0.75)
 	color.h = (1.0/3.0)-(percentage/3.0)
 	if (timer/default_timer) < 1 and timer > 0:
+		draw_texture(timer_background,Vector2(-64,-64),Color(1,1,1,0.25))
 		draw_circle_arc_poly(Vector2.ZERO,40,start_position,360,color)
 
 func _process(delta):

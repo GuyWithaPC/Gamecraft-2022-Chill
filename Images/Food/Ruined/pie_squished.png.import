@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/background.jpeg-a84054ed8dcab0b003e435eb90a6fd94.stex"
+path="res://.import/pie_squished.png-ffd199f5e5116a5883535b481888b27c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/background.jpeg"
-dest_files=[ "res://.import/background.jpeg-a84054ed8dcab0b003e435eb90a6fd94.stex" ]
+source_file="res://Images/Food/Ruined/pie_squished.png"
+dest_files=[ "res://.import/pie_squished.png-ffd199f5e5116a5883535b481888b27c.stex" ]
 
 [params]
 
