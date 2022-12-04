@@ -14,9 +14,6 @@ shader_param/lod = 0.0
 [node name="Root" type="Control"]
 pause_mode = 2
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Background" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -49,4 +46,5 @@ autoplay = true
 stream = ExtResource( 6 )
 volume_db = -15.0
 autoplay = true
+
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
