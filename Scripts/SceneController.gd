@@ -46,9 +46,12 @@ func _process(delta):
 	if dragging:
 		Input.set_custom_mouse_cursor(grabbed_cursor,0,Vector2(30,30))
 	else:
-		Input.set_custom_mouse_cursor(open_cursor,0,Vector2(30,30))
+		if Input.is_action_pressed("left_click"):
+			Input.set_custom_mouse_cursor(grabbed_cursor,0,Vector2(30,30))
+		else:
+			Input.set_custom_mouse_cursor(open_cursor,0,Vector2(30,30))
 	
-	if randi()%200 == 0:
+	if randi()%500 == 0:
 		# Summon a food item
 		var food = randi()%len(foods)
 		var summoned = food_scene.get_node(foods[food]).duplicate()
@@ -65,8 +68,9 @@ func _process(delta):
 		spill_mask_index += 1
 		# Add it to this node
 		add_child(summoned)
-	if randi()%500 == 0 and !wanting_food:
-		var food = foods[randi()%len(foods)]
+	if randi()%750 == 0 and !wanting_food and len(get_tree().get_nodes_in_group("Food")) > 0:
+		var random_food = get_tree().get_nodes_in_group("Food")[randi()%len(get_tree().get_nodes_in_group("Food"))]
+		var food = random_food.name.replace("@","").rstrip("0123456789")
 		print("wants: "+food)
 		wanting_food = food
 	

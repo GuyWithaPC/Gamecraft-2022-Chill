@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/StackedFoodsFix.wav-4be4f64c7d7d4f32f0f3cf57fbe67e4b.sample"
+
+[deps]
+
+source_file="res://Sounds/StackedFoodsFix.wav"
+dest_files=[ "res://.import/StackedFoodsFix.wav-4be4f64c7d7d4f32f0f3cf57fbe67e4b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
