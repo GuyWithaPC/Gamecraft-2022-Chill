@@ -25,6 +25,7 @@ onready var food_sprites = {
 	"Soup" : preload("res://Images/Food/soup.png"),
 	"Tea" : preload("res://Images/Food/tea.png"),
 	"TupperwareLg" : preload("res://Images/Food/tupperware_lg.png"),
+	"TupperwareMd" : preload("res://Images/Food/tupperware_md.png"),
 	"TupperwareSm" : preload("res://Images/Food/tupperware_sm.png"),
 	"Turkey" : preload("res://Images/Food/turkey.png"),
 	"Watermelon" : preload("res://Images/Food/watermelon.png")
@@ -37,9 +38,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if dragging:
-		Input.set_custom_mouse_cursor(grabbed_cursor,0,Vector2(50,30))
+		Input.set_custom_mouse_cursor(grabbed_cursor,0,Vector2(30,30))
 	else:
-		Input.set_custom_mouse_cursor(open_cursor,0,Vector2(50,30))
+		Input.set_custom_mouse_cursor(open_cursor,0,Vector2(30,30))
 	
 	if randi()%200 == 0:
 		var food = randi()%len(foods)
