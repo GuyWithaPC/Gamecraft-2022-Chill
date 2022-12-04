@@ -134,7 +134,6 @@ autoplay = true
 stream = ExtResource( 6 )
 volume_db = -15.0
 autoplay = true
-
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="HelpButton" to="." method="_on_HelpButton_pressed"]
 [connection signal="pressed" from="HelpMenu/HelpClose" to="." method="_on_HelpClose_pressed"]

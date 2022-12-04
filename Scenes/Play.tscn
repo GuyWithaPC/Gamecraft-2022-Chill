@@ -42,10 +42,6 @@ scale = Vector2( 1.504, 1.504 )
 z_index = -1
 texture = ExtResource( 8 )
 
-[node name="NewActionTimer" type="Timer" parent="."]
-wait_time = 2.0
-autostart = true
-
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
 autoplay = true
@@ -168,5 +164,8 @@ margin_right = 1272.0
 margin_bottom = 1015.0
 icon = ExtResource( 13 )
 
-[connection signal="timeout" from="NewActionTimer" to="." method="_on_NewActionTimer_timeout"]
+[node name="NewActionTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
 [connection signal="pressed" from="UI/RetryButton" to="." method="_on_RetryButton_pressed"]
+[connection signal="timeout" from="NewActionTimer" to="." method="_on_NewActionTimer_timeout"]

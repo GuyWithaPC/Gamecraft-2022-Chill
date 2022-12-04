@@ -116,7 +116,7 @@ func _on_RetryButton_pressed():
 
 
 func _on_NewActionTimer_timeout():
-	if randi()%2 == 0 and !wanting_food and len(get_tree().get_nodes_in_group("Fridge")) > 0:
+	if randi()%int(max(2,5-len(get_tree().get_nodes_in_group("Fridge")))) == 0 and !wanting_food and len(get_tree().get_nodes_in_group("Fridge")) > 0:
 		spawn_random_request()
 	else:
 		spawn_random_food()
