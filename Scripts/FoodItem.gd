@@ -11,6 +11,7 @@ var dead = false
 var dead_timer = 2.0
 var start = true
 var start_timer = 1.0
+var last_contacts_list = []
 
 onready var _last_position = start_position
 onready var _play_area = get_tree().get_root().get_child(0).get_node("PlayArea")
@@ -174,8 +175,10 @@ func _on_body_exited(body):
 		in_play_area = false
 
 func _on_collided(body):
-	sound_player.stream = sound_effects[randi()%len(sound_effects)]
-	sound_player.play()
+	if !(body in last_contacts_list):
+		sound_player.stream = sound_effects[randi()%len(sound_effects)]
+		sound_player.play()
+	last_contacts_list = self.get_colliding_bodies()
 
 # helper functions
 
