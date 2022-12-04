@@ -55,6 +55,7 @@ func timer_out():
 	for obj in get_tree().get_nodes_in_group("Table"):
 		obj.queue_free()
 	lose = true
+	dragging = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
