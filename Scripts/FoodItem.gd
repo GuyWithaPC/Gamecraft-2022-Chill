@@ -30,6 +30,7 @@ onready var sound_effects = [
 export var default_timer = 5.0
 onready var timer = default_timer
 onready var sound_player = AudioStreamPlayer.new()
+onready var timer_warning = AudioStreamPlayer.new()
 
 export var start_position = Vector2(0,0)
 
@@ -43,6 +44,9 @@ export var death_angle_margin = 0
 
 func _ready():
 	self.add_child(sound_player)
+	self.add_child(timer_warning)
+	timer_warning.stream = load("res://Sounds/SingleBump.wav")
+	timer_warning.volume_db = 2
 	sound_player.volume_db = 0
 	self.contact_monitor = true
 	self.contacts_reported = 1
@@ -73,6 +77,8 @@ func _draw():
 		draw_circle_arc_poly(Vector2.ZERO,40,start_position,360,color)
 
 func _process(delta):
+	if (timer/default_timer) < 0.25 and !timer_warning.playing:
+		timer_warning.play()
 	if start:
 		start_timer -= delta
 		if start_timer <= 0:
