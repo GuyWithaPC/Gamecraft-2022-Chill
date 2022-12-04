@@ -65,7 +65,7 @@ func _process(delta):
 	time_elapsed += delta
 	
 	# First 10 seconds are normal, then it starts speeding up
-	var music_speed = clamp(1 + ((time_elapsed - 10) / 300), 1, 1.5)
+	var music_speed = clamp(1 + ((time_elapsed - 15) / 500), 1, 1.5)
 
 	$MusicPlayer.pitch_scale = music_speed
 	
