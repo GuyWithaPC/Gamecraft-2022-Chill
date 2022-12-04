@@ -44,6 +44,7 @@ func _ready():
 	$Sprite.show_behind_parent = true
 	add_to_group("Food")
 	add_to_group("Table")
+	pause_mode = PAUSE_MODE_STOP
 
 func _draw():
 	var percentage = ((default_timer-timer)/default_timer)
@@ -118,6 +119,8 @@ func _process(delta):
 			if timer < default_timer:
 				timer += 2*delta
 			update()
+	if timer <= 0:
+		get_tree().get_root().get_node("Root").timer_out()
 
 func _integrate_forces(state):
 	var lv = state.get_linear_velocity()
@@ -172,6 +175,7 @@ func draw_circle_arc_poly(center, radius, angle_from, angle_to, color):
 func check_death_from_collision():
 	for obj in $DeathArea.get_overlapping_bodies():
 		if obj.is_in_group("Fridge") and obj.is_in_group("Food") and obj != self and !obj.dragged:
+			get_tree().get_root().get_node("Root").food_destroyed()
 			return true
 	return false
 
@@ -184,5 +188,6 @@ func check_death_from_angle():
 		modulate = Color(1.0,1.0,1.0)
 	if !dragged:
 		if !(wrapf(self.rotation,0,2*PI) < deg2rad(death_angle_margin) or wrapf(self.rotation,0,2*PI) > 2*PI-deg2rad(death_angle_margin)):
+			get_tree().get_root().get_node("Root").food_destroyed()
 			return true
 	return false

@@ -7,6 +7,8 @@ extends Node2D
 
 var dragging = false
 var wanting_food = null
+var score = 0
+var target_score = 0
 
 onready var food_scene = preload("res://Prefabs/FoodItems.tscn").instance()
 onready var grabbed_cursor = preload("res://Images/cursor/cursor_closed.png")
@@ -40,9 +42,21 @@ var max_spill_mask_index = 200
 func _ready():
 	randomize()
 
+func food_destroyed():
+	target_score -= 20
+
+func timer_out():
+	get_tree().paused = true
+	for obj in get_tree().get_nodes_in_group("Fridge"):
+		target_score += 5
+		obj.queue_free()
+	for obj in get_tree().get_nodes_in_group("Table"):
+		obj.queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	score = lerp(score,target_score,delta*10)
+	$UI/Score.text = "Score: " + str(round(score))
 	if dragging:
 		Input.set_custom_mouse_cursor(grabbed_cursor,0,Vector2(30,30))
 	else:
@@ -56,7 +70,7 @@ func _process(delta):
 		var food = randi()%len(foods)
 		var summoned = food_scene.get_node(foods[food]).duplicate()
 		# Set its values
-		summoned.start_position = Vector2(randi()%500,randi()%(1080/2)+1080/2)
+		summoned.start_position = Vector2(randi()%300+100,randi()%(1080/2)+1080/2)
 		summoned.position = summoned.start_position - Vector2(500,0)
 		summoned.scale = Vector2(0.5,0.5)
 		# Set up its spill mask
@@ -73,6 +87,7 @@ func _process(delta):
 		var food = random_food.name.replace("@","").rstrip("0123456789")
 		print("wants: "+food)
 		wanting_food = food
+		grab_region.ask()
 	
 	if wanting_food != null:
 		want_speech.texture = food_sprites[wanting_food]
@@ -85,7 +100,9 @@ func _process(delta):
 			if obj.is_in_group("Food"):
 				if wanting_food in obj.name and !obj.dragged:
 					obj.queue_free()
+					target_score += 10
 					wanting_food = null
+					grab_region.retreat()
 					break
 	else:
 		hand.unit_offset = lerp(hand.unit_offset,0,delta*5)
