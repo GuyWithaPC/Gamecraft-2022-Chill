@@ -49,7 +49,7 @@ func _draw():
 	var start_position = percentage*360
 	var color = Color(0,1,0)
 	color.h = (1.0/3.0)-(percentage/3.0)
-	if (timer/default_timer) < 1:
+	if (timer/default_timer) < 1 and timer > 0:
 		draw_circle_arc_poly(Vector2.ZERO,40,start_position,360,color)
 
 func _process(delta):
@@ -74,12 +74,17 @@ func _process(delta):
 		dragged = !dragged
 		if !dragged:
 			_last_position = position
+			get_parent().dragging = false
 		if dragged:
-			self.set_collision_layer_bit(0,false)
-			self.set_collision_mask_bit(0,false)
-			if dies_from_collision:
-				$DeathArea.set_collision_layer_bit(0,false)
-				$DeathArea.set_collision_mask_bit(0,false)
+			if !get_parent().dragging:
+				get_parent().dragging = true
+				self.set_collision_layer_bit(0,false)
+				self.set_collision_mask_bit(0,false)
+				if dies_from_collision:
+					$DeathArea.set_collision_layer_bit(0,false)
+					$DeathArea.set_collision_mask_bit(0,false)
+			else:
+				dragged = false
 		if !dragged and in_play_area:
 			self.set_collision_layer_bit(0,true)
 			self.set_collision_mask_bit(0,true)
@@ -163,6 +168,9 @@ func check_death_from_collision():
 	return false
 
 func check_death_from_angle():
+	# also change sprite color based on how close it is
+	var tilt = abs(wrapf(self.rotation,-PI,PI)/deg2rad(death_angle_margin))
+	modulate = Color(1.0,1.0-tilt,1.0-tilt)
 	if !dragged:
 		if !(wrapf(self.rotation,0,2*PI) < deg2rad(death_angle_margin) or wrapf(self.rotation,0,2*PI) > 2*PI-deg2rad(death_angle_margin)):
 			return true
