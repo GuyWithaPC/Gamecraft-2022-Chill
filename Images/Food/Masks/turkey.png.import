@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cursor_open.png-3b2eafcf27740591a5c1c3d8378f1f4c.stex"
+path="res://.import/turkey.png-c1145b2fc1891499d28992c58b7968e0.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/cursor/cursor_open.png"
-dest_files=[ "res://.import/cursor_open.png-3b2eafcf27740591a5c1c3d8378f1f4c.stex" ]
+source_file="res://Images/Food/Masks/turkey.png"
+dest_files=[ "res://.import/turkey.png-c1145b2fc1891499d28992c58b7968e0.stex" ]
 
 [params]
 

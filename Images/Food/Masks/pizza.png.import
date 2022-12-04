@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cursor_open.png-3b2eafcf27740591a5c1c3d8378f1f4c.stex"
+path="res://.import/pizza.png-c0a40be2e374b03318a2dadd06118569.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/cursor/cursor_open.png"
-dest_files=[ "res://.import/cursor_open.png-3b2eafcf27740591a5c1c3d8378f1f4c.stex" ]
+source_file="res://Images/Food/Masks/pizza.png"
+dest_files=[ "res://.import/pizza.png-c0a40be2e374b03318a2dadd06118569.stex" ]
 
 [params]
 

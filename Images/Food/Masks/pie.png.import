@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cursor_open.png-3b2eafcf27740591a5c1c3d8378f1f4c.stex"
+path="res://.import/pie.png-523d4d5ec0c94356c29ef5131df6a071.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/cursor/cursor_open.png"
-dest_files=[ "res://.import/cursor_open.png-3b2eafcf27740591a5c1c3d8378f1f4c.stex" ]
+source_file="res://Images/Food/Masks/pie.png"
+dest_files=[ "res://.import/pie.png-523d4d5ec0c94356c29ef5131df6a071.stex" ]
 
 [params]
 
