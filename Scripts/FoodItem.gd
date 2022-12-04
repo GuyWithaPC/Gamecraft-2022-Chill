@@ -34,6 +34,7 @@ export var start_position = Vector2(0,0)
 
 # to enable this, the FoodItem it's attached to needs to have a DeathArea Area2D attached
 export var dies_from_collision = false
+export (Texture) var collision_texture
 
 # this one just works as long as you set the margin properly
 export var dies_from_angle = false
@@ -84,15 +85,18 @@ func _process(delta):
 	
 	if dead:
 		modulate = Color(1.0,1.0,1.0)
-		$Spill.visible = true
 		dead_timer -= delta
 		if dead_timer <= 0:
 			dragged = false
 			get_parent().dragging = false
 			self.queue_free()
-		$Sprite.modulate = Color(1,1,1,0.2)
-		if $Spill.modulate == Color(1,1,1):
-			$Spill.modulate = Color(randf(),randf(),randf())
+		$Sprite.modulate = Color(1,1,1,1)
+		if !dies_from_collision:
+			$Spill.visible = true
+			if $Spill.modulate == Color(1,1,1):
+				$Spill.modulate = Color(randf(),randf(),randf())
+		else:
+			$Sprite.texture = collision_texture
 	
 	if mouse_inside and Input.is_action_just_pressed("left_click"):
 		dragged = !dragged
